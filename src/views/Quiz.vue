@@ -6,16 +6,11 @@
           <!-- ℚ𝔼𝔻 -->
           {{ quiz.title }}
         </p>
+        <p class="card-header-title has-text-light" style="flex-direction: row-reverse;">
+          {{ questionIndex + 1 }}/{{ quiz.questions.length}}
+        </p>
       </header>
-      <Question :question="quiz.questions[questionIndex]" :validate="validate"/>
-      <footer class="card-footer">
-        <a v-bind:class="{ 'has-text-light': questionIndex==0 }"
-          href="#" class="card-footer-item" @click="prev">⬅</a>
-        <a v-if="quiz.questions[questionIndex].type != 'number'"
-          href="#" class="card-footer-item" @click="validate = !validate">&check;</a>
-        <a v-bind:class="{ 'has-text-light': questionIndex == quiz.questions.length-1 }"
-          href="#" class="card-footer-item" @click="next">➡</a>
-      </footer>
+      <Question :question="quiz.questions[questionIndex]" @next="next" @prev="prev" />
     </div>
   </div>
   <span v-if="quiz && quiz.questions.length == 0">Quizet är tomt.</span>
@@ -80,7 +75,6 @@ export default defineComponent({
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
   .card {
     position: absolute;

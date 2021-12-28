@@ -24,7 +24,7 @@ export default defineComponent({
 
 <style lang="scss">
 /* Bulma imports */
-@import "@/bulma-overrides.scss";
+@import "@/assets/bulma-overrides.scss";
 @import "bulma/sass/utilities/_all.sass";
 @import "bulma/sass/base/_all.sass";
 

@@ -1,40 +1,39 @@
 <template>
-  <!-- Multiple-choice questions -->
-  <MCQ v-if="question.type == 'mcq'" :question="question" :validate="validate" />
-  <!-- Numerical input questions -->
-  <NumberQuestion v-if="question.type == 'number'" :question="question"/>
-
-  <!-- Relays events up to the Quiz view. -->
-  <CardNav
-    @validate="validate = !validate"
-    @next="$emit('next'); validate = false;"
-    @prev="$emit('prev'); validate = false;"
-    :showCheck="question.type !== 'number'"/>
+  <div class="card-content">
+    <div class="content">
+      <div v-html="renderMD(question.question)"></div>
+    </div>
+    <hr>
+    <div>
+      <label v-bind:key="key" class="mcq-option checkbox" v-for="option, key in shuffledOptions">
+        <input type="checkbox" v-model="checkedOptions[key]">
+        <span v-html="renderMD(option)"></span>
+        <span v-if="validate" style="float: right;">
+          <span v-if="checkedOptions[key] == isCorrect(option)" title="Du valde rätt!"
+            class="has-text-success">&check;</span>
+          <span v-if="checkedOptions[key] != isCorrect(option)" v-bind:title="isCorrect(option) ?
+                'Det här alternativet ska vara valt.' : 'Det här alternativet ska inte vara valt.'"
+            class="has-text-danger">&cross;</span>
+        </span>
+      </label>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-// Libraries
 import { defineComponent } from 'vue';
 import mdi from 'markdown-it';
 import mdk from '@traptitech/markdown-it-katex';
-
-// Utils & types
 import { Question } from '@/types';
 import { shuffle } from '@/utils';
-
-// Components
-import CardNav from './CardNav.vue';
-import MCQ from './question/MCQ.vue';
-import NumberQuestion from './question/Number.vue';
 
 const md = mdi().use(mdk, { displayMode: true });
 
 export default defineComponent({
   name: 'Card',
-  emits: ['prev', 'next'],
-  components: { CardNav, MCQ, NumberQuestion },
   props: {
     question: Object,
+    validate: Boolean,
   },
   data() {
     const q = this.$props.question;
@@ -44,7 +43,6 @@ export default defineComponent({
       showChecks: true,
       checkedOptions: Array(shuffledOptions.length).fill(false),
       numericInput: NaN as number,
-      validate: false,
     };
   },
   methods: {
