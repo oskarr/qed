@@ -1,0 +1,33 @@
+{
+    "title": "Quiz 1",
+    "questions": [
+        {
+            "question": "Vilka av följande är primitiva funktioner till $\\int 3x dx$?",
+            "type": "mcq",
+            "correctAnswers": [
+                "$\\frac{3x^2}{2}$",
+                "$\\frac{3x^2-3}{2}$"
+            ],
+            "incorrectAnswers": [
+                "$3x^2$",
+                "$3x^2+1$"
+            ]
+        },
+        {
+            "question": "Vad blir $5+0.32$?",
+            "type": "number",
+            "answer": 5.32
+        },
+        {
+            "question": "En __ operator uppfyller $L(a \\vec x + \\vec y) = aL(\\vec x) + L(\\vec y)$",
+            "type": "fill",
+            "blanks": ["linjär"]
+        },
+        {
+            "question": "_______ äts på __middagen",
+            "type": "fill",
+            "random": 1,
+            "blanks": ["brunch", "för"]
+        }
+    ]
+}
