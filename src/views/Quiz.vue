@@ -20,7 +20,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { useRoute } from 'vue-router';
 import { Quiz } from '@/types';
 import Question from '@/components/Question.vue';
 
@@ -57,7 +56,7 @@ export default defineComponent({
       this.quiz = undefined;
       this.loading = true;
       const fetchedId = this.$route.params.id;
-      fetch(`/quiz/${fetchedId}.json`).then(async (res: any) => {
+      fetch(`/quiz/${fetchedId}.json`).then(async (res: Response) => {
         // make sure this request is the last one we did, discard otherwise
         if (this.$route.params.id === fetchedId) {
           this.loading = false;
@@ -76,6 +75,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@media only screen and (min-width: 960px) {
   .card {
     position: absolute;
     top: 50%;
@@ -83,6 +83,13 @@ export default defineComponent({
     transform: translate(-50%, -50%);
 
     width: max-content;
-    min-width: min(10cm, 100vh);
+    min-width: min(10cm, 100vw);
   }
+}
+
+@media only screen and (max-width: 960px) {
+  .card {
+    min-height: 100vh;
+  }
+}
 </style>

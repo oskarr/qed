@@ -2,14 +2,16 @@
   <!-- Multiple-choice questions -->
   <MCQ v-if="question.type == 'mcq'" :question="question" :validate="validate" />
   <!-- Numerical input questions -->
-  <NumberQuestion v-if="question.type == 'number'" :question="question"/>
+  <NumberQuestion v-if="question.type == 'number'" :question="question" />
+  <!-- Fill in the blank-questions -->
+  <Fill v-if="question.type == 'fill'" :question="question" :validate="validate" />
 
   <!-- Relays events up to the Quiz view. -->
   <CardNav
     @validate="validate = !validate"
     @next="$emit('next'); validate = false;"
     @prev="$emit('prev'); validate = false;"
-    :showCheck="question.type !== 'number'"/>
+    :showCheck="question.type !== 'number'" />
 </template>
 
 <script lang="ts">
@@ -18,52 +20,29 @@ import { defineComponent } from 'vue';
 import mdi from 'markdown-it';
 import mdk from '@traptitech/markdown-it-katex';
 
-// Utils & types
-import { Question } from '@/types';
-import { shuffle } from '@/utils';
-
 // Components
 import CardNav from './CardNav.vue';
 import MCQ from './question/MCQ.vue';
 import NumberQuestion from './question/Number.vue';
+import Fill from './question/Fill.vue';
 
 const md = mdi().use(mdk, { displayMode: true });
 
 export default defineComponent({
   name: 'Card',
   emits: ['prev', 'next'],
-  components: { CardNav, MCQ, NumberQuestion },
-  props: {
-    question: Object,
+  components: {
+    CardNav, MCQ, Fill, NumberQuestion,
   },
+  props: { question: Object },
   data() {
-    const q = this.$props.question;
-    const shuffledOptions = shuffle([...q?.correctAnswers, ...q?.incorrectAnswers]) || [];
     return {
-      shuffledOptions,
-      showChecks: true,
-      checkedOptions: Array(shuffledOptions.length).fill(false),
-      numericInput: NaN as number,
       validate: false,
     };
   },
   methods: {
     renderMD(mdRaw: string) {
       return md.render(mdRaw);
-    },
-    shuffle,
-    isCorrect(answer: any): boolean {
-      const q = this.$props?.question;
-      if (!q) { return false; }
-      switch ((q as Question).type) {
-        case 'mcq':
-          return (q.correctAnswers.indexOf(answer as string) > -1);
-        case 'number':
-          // Alt. Math.abs(((answer as number) / q.answer) - 1) < tol
-          return q.answer === (answer as number);
-        default:
-          return false;
-      }
     },
   },
 });

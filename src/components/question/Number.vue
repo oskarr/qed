@@ -10,7 +10,7 @@
       <div class="field">
         <p class="control has-icons-right">
         <input class="input" type="number" placeholder="T.ex. 17.23" v-model="numericInput"
-        v-bind:class="{'is-success': isCorrect(numericInput), 'is-danger': !isCorrect(numericInput)}">
+         v-bind:class="{'is-success':isCorrect(numericInput),'is-danger':!isCorrect(numericInput)}">
         <span class="icon is-right has-text-success">
           <span v-if="isCorrect(numericInput)" class="has-text-success">&check;</span>
           <span v-if="!isCorrect(numericInput)" class="has-text-danger">&cross;</span>
@@ -25,13 +25,12 @@
 import { defineComponent } from 'vue';
 import mdi from 'markdown-it';
 import mdk from '@traptitech/markdown-it-katex';
-import { Question } from '@/types';
 import { shuffle } from '@/utils';
 
 const md = mdi().use(mdk, { displayMode: true });
 
 export default defineComponent({
-  name: 'Card',
+  name: 'NumberQuestion',
   props: {
     question: Object,
   },

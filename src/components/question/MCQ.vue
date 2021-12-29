@@ -24,13 +24,12 @@
 import { defineComponent } from 'vue';
 import mdi from 'markdown-it';
 import mdk from '@traptitech/markdown-it-katex';
-import { Question } from '@/types';
 import { shuffle } from '@/utils';
 
 const md = mdi().use(mdk, { displayMode: true });
 
 export default defineComponent({
-  name: 'Card',
+  name: 'MCQuestion',
   props: {
     question: Object,
     validate: Boolean,
@@ -50,18 +49,9 @@ export default defineComponent({
       return md.render(mdRaw);
     },
     shuffle,
-    isCorrect(answer: any): boolean {
+    isCorrect(answer: string): boolean {
       const q = this.$props?.question;
-      if (!q) { return false; }
-      switch ((q as Question).type) {
-        case 'mcq':
-          return (q.correctAnswers.indexOf(answer as string) > -1);
-        case 'number':
-          // Alt. Math.abs(((answer as number) / q.answer) - 1) < tol
-          return q.answer === (answer as number);
-        default:
-          return false;
-      }
+      return (q !== undefined) && (q.correctAnswers.indexOf(answer) > -1);
     },
   },
 });

@@ -28,3 +28,14 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss">
+@media only screen and (max-width: 960px) {
+  .card-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    min-height: 10vh;
+  }
+}
+</style>

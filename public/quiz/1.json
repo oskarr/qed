@@ -19,15 +19,9 @@
             "answer": 5.32
         },
         {
-            "question": "En __ operator uppfyller $L(a \\vec x + \\vec y) = aL(\\vec x) + L(\\vec y)$",
+            "question": "En ___ operator uppfyller $L(a \\vec x + \\vec y) = aL(\\vec x) + L(\\vec y)$",
             "type": "fill",
             "blanks": ["linjär"]
-        },
-        {
-            "question": "_______ äts på __middagen",
-            "type": "fill",
-            "random": 1,
-            "blanks": ["brunch", "för"]
         }
     ]
 }
