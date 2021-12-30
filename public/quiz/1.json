@@ -2,26 +2,54 @@
     "title": "Quiz 1",
     "questions": [
         {
-            "question": "Vilka av följande är primitiva funktioner till $\\int 3x dx$?",
+            "question": "Vilka av följande gäller för Heaviside-funktionen $H$?",
             "type": "mcq",
             "correctAnswers": [
-                "$\\frac{3x^2}{2}$",
-                "$\\frac{3x^2-3}{2}$"
+                "$H(x) = \\int_{-\\infty}^{x} \\delta(t)dt$, där $\\delta$ är Diracs deltafunktion.",
+                "Alla styckvis kontinuerliga funktioner kan uttryckas med hjälp av $H$.",
+                "Dess \"derivata\" är ingen funktion, utan en distribution."
             ],
             "incorrectAnswers": [
-                "$3x^2$",
-                "$3x^2+1$"
+                "Den har ingen andraderivata. Dvs. $H''$ är varken en funktion eller distribution.",
+                "$H(0)$ har en entydig definition."
             ]
         },
         {
-            "question": "Vad blir $5+0.32$?",
-            "type": "number",
-            "answer": 5.32
+            "question": "Laplacetransformen av en derivata, dvs. $\\mathscr{L}[f'(t)](s)$ ges av följande, givet att $\\mathscr{L}[f(t)](s)=F(s)$:",
+            "type": "scq",
+            "comment": "THIS SYNTAX IS SUBJECT TO CHANGE",
+            "correctAnswers": ["$sF(s) - f(0)$"],
+            "incorrectAnswers": [
+                "$F(s) - sf(0)$",
+                "$sF(s) + f(0)$",
+                "$F(s) + f'(0)$",
+                "$\\frac{F(s)}{s}-f(0)$"
+            ]
         },
         {
-            "question": "En ___ operator uppfyller $L(a \\vec x + \\vec y) = aL(\\vec x) + L(\\vec y)$",
+            "question": "Definitionen av laplacetransformen är:\n\n$\\mathscr{L}[f(t)](s) = F(s) =$ ___",
             "type": "fill",
-            "blanks": ["linjär"]
+            "blanks": ["$\\int_{0}^{\\infty} e^{-st}f(t)dt$"]
+        },
+        {
+            "question": "$\\mathscr{L}[H(t-c)f(t-c)](s)=$ ___",
+            "type": "fill",
+            "blanks": ["$e^{-cs}\\mathscr{L}[f(t)](s)$"]
+        },
+        {
+            "question": "$\\mathscr{L}[e^{ct}f(t)](s)=$ ___",
+            "type": "fill",
+            "blanks": ["$\\mathscr{L}[f(t)](s-c)$"]
+        },
+        {
+            "question": "$\\mathscr{L}[f(at)](s)=$ ___",
+            "type": "fill",
+            "blanks": ["$\\frac{\\mathscr{L}[f(t)]\\left(\\frac{s}{a}\\right)}{a}$"]
+        },
+        {
+            "question": "Vad blir $e^0$?",
+            "type": "number",
+            "answer": 1
         }
     ]
 }

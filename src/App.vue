@@ -1,7 +1,5 @@
 <template>
-  <div class="container is-max-desktop" style="max-width: 1152px;">
-    <Quiz />
-  </div>
+  <Quiz />
 </template>
 
 <script lang="ts">
@@ -23,15 +21,16 @@ export default defineComponent({
 </style>
 
 <style lang="scss">
+body, #app {min-height: 100vh; width: 100%;}
 /* Bulma imports */
 @import "@/assets/bulma-overrides.scss";
 @import "bulma/sass/utilities/_all.sass";
 @import "bulma/sass/base/_all.sass";
 
 /* Slim (production) */
-@import "bulma/sass/components/card.sass";
-@import "bulma/sass/elements/container.sass";
-@import "bulma/sass/helpers/color.sass";
+/* @import "bulma/sass/components/card.sass"; */
+/* @import "bulma/sass/elements/container.sass"; */
+/* @import "bulma/sass/helpers/color.sass"; */
 
 /* Everything (development) */
 @import "bulma/bulma.sass";

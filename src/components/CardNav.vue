@@ -1,11 +1,11 @@
 <template>
-  <footer class="card-footer">
-    <a v-bind:class="{ 'has-text-light': hasPrev }"
-      href="#" class="card-footer-item" @click="$emit('prev')">⬅</a>
-    <a v-if="showCheck"
-      href="#" class="card-footer-item" @click="$emit('validate')">&check;</a>
-    <a v-bind:class="{ 'has-text-light': hasNext }"
-      href="#" class="card-footer-item" @click="$emit('next')">➡</a>
+  <footer class="card-footer has-background-light">
+    <a class="card-footer-item" v-bind:class="{ 'has-text-light': hasPrev }"
+      @click="$emit('prev')">⬅</a>
+    <a class="card-footer-item" v-if="showCheck"
+      @click="$emit('validate')">&check;</a>
+    <a class="card-footer-item" v-bind:class="{ 'has-text-light': hasNext }"
+      @click="$emit('next')">➡</a>
   </footer>
 </template>
 
@@ -30,12 +30,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@media only screen and (max-width: 960px) {
+/* @media only screen and (max-width: 960px) { */
   .card-footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
-    width: 100vw;
+    font-size: 3vh;
+    width: 100%;
     min-height: 10vh;
   }
-}
+/* } */
 </style>

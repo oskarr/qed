@@ -1,10 +1,10 @@
 <template>
-  <!-- Multiple-choice questions -->
-  <MCQ v-if="question.type == 'mcq'" :question="question" :validate="validate" />
+  <!-- Multiple-choice questions (And single-choice, for now) -->
+  <MCQ v-if="question.type == 'mcq' || question.type == 'scq'" :question="question" :validate="validate" v-bind:key="question" />
   <!-- Numerical input questions -->
-  <NumberQuestion v-if="question.type == 'number'" :question="question" />
+  <NumberQuestion v-if="question.type == 'number'" :question="question" v-bind:key="question" />
   <!-- Fill in the blank-questions -->
-  <Fill v-if="question.type == 'fill'" :question="question" :validate="validate" />
+  <Fill v-if="question.type == 'fill'" :question="question" :validate="validate" v-bind:key="question" />
 
   <!-- Relays events up to the Quiz view. -->
   <CardNav
@@ -47,15 +47,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped lang="scss">
-.mcq-option {
-  min-height: 3em;
-  width: 100%;
-
-  & span {
-    display: inline-block;
-    margin-left: 0.5em;
-  }
-}
-</style>

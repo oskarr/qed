@@ -1,8 +1,6 @@
 <template>
   <div class="card-content">
-    <div class="content">
-      <div v-html="renderMD(question.question)"></div>
-    </div>
+    <div v-html="renderMD(question.question)"></div>
     <hr>
     <div>
       <label v-bind:key="key" class="mcq-option checkbox" v-for="option, key in shuffledOptions">

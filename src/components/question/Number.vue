@@ -2,9 +2,7 @@
 
 <template>
   <div class="card-content">
-    <div class="content">
-      <div v-html="renderMD(question.question)"></div>
-    </div>
+    <div v-html="renderMD(question.question)"></div>
     <hr>
     <div>
       <div class="field">
@@ -51,15 +49,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped lang="scss">
-.mcq-option {
-  min-height: 3em;
-  width: 100%;
-
-  & span {
-    display: inline-block;
-    margin-left: 0.5em;
-  }
-}
-</style>

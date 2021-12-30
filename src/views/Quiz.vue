@@ -1,18 +1,24 @@
 <template>
-  <div v-if="quiz && quiz.questions.length > 0">
-    <div class="card">
-      <header class="card-header">
-        <p class="card-header-title has-text-light">
-          <!-- ℚ𝔼𝔻 -->
+  <Swiper :swipeHandler="swipeHandler" v-if="quiz && quiz.questions.length > 0" style="min-height: 100vh;">
+    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <div class="navbar-item">
           {{ quiz.title }}
-        </p>
-        <p class="card-header-title has-text-light" style="flex-direction: row-reverse;">
-          {{ questionIndex + 1 }}/{{ quiz.questions.length}}
-        </p>
-      </header>
-      <Question :question="quiz.questions[questionIndex]" @next="next" @prev="prev" />
-    </div>
-  </div>
+        </div>
+        <router-link :to="'/'" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </router-link>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-end">
+          <router-link :to="'/'" role="button" class="navbar-item">☰</router-link>
+        </div>
+      </div>
+    </nav>
+    <Question :question="quiz.questions[questionIndex]" @next="next" @prev="prev" />
+  </Swiper>
   <span v-if="quiz && quiz.questions.length == 0">Quizet är tomt.</span>
   <span v-if="loading">Laddar...</span>
   <span v-if="error">{{ error }}</span>
@@ -22,11 +28,13 @@
 import { defineComponent } from 'vue';
 import { Quiz } from '@/types';
 import Question from '@/components/Question.vue';
+import Swiper from '@/components/Swiper.vue';
+import { SwipeIndicatorState } from '@/utils';
 
 export default defineComponent({
   name: 'Quiz',
   components: {
-    Question,
+    Question, Swiper,
   },
   data() {
     return {
@@ -50,6 +58,12 @@ export default defineComponent({
     },
     prev() {
       this.questionIndex = Math.max(0, this.questionIndex - 1);
+    },
+    swipeHandler(direction: SwipeIndicatorState) {
+      // Move up to the main view if the user swipes right
+      // (that is, the indicator is shown on the left-hand side, hence the 'left')
+      (direction === 'right') && this.next();
+      (direction === 'left') && this.prev();
     },
     fetchData() {
       this.error = undefined;
@@ -75,7 +89,11 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-@media only screen and (min-width: 960px) {
+  .card {
+    height: 100%;
+    width: 100%;
+  }
+/* @media only screen and (min-width: 960px) {
   .card {
     position: absolute;
     top: 50%;
@@ -91,5 +109,5 @@ export default defineComponent({
   .card {
     min-height: 100vh;
   }
-}
+} */
 </style>
