@@ -1,10 +1,8 @@
 <!-- Component for handling swipes. -->
 <template>
   <div class="component-swiper" v-touch:release="releaseHandler" v-touch:press="pressHandler" v-touch:drag="dragHandler">
-
     <!-- Subcomponent injection -->
     <slot></slot>
-
     <!-- Swipe indicators -->
     <transition name="swipe-right">
       <div class="swipe-indicator right has-background-primary" v-if="showSwipeIndicator.includes('right')"
@@ -18,7 +16,6 @@
         {{ showSwipeIndicator.includes('x') ? "⊘" : "➡" }}
       </div>
     </transition>
-
   </div>
 </template>
 

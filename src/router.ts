@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
-import Quiz from '@/views/Quiz.vue';
+import Quiz from '@/views/Quiz';
 
 const routes: Array<RouteRecordRaw> = [
   {

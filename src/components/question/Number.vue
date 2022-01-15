@@ -13,6 +13,7 @@
           <span v-if="isCorrect(numericInput)" class="has-text-success">&check;</span>
           <span v-if="!isCorrect(numericInput)" class="has-text-danger">&cross;</span>
         </span>
+        <span style="font-size: 0.6em;float:right;">(Nummerinmatning är experimentellt)</span>
         </p>
       </div>
     </div>

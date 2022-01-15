@@ -1,0 +1,53 @@
+/* Imports */
+@import "./variables.scss";
+@import "./WiTeX.scss";
+@import url("https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.15.1/katex.min.css");
+
+/* Layout */
+.document {
+    max-width: min(70vw, 20cm);
+    margin: auto auto;
+}
+
+/*
+ * The quiz container
+ */
+.quiz-container {
+    & header, footer {
+        color: $white;
+        padding: 0.75em;
+        font-weight: 600;
+    }
+    & header { background-color: $red; }
+    & footer {
+        background-color: $blue;
+        display: flex;
+        flex-direction: row;
+        & a {
+            color: $white;
+            width: 100%;
+            text-align: center;
+        }
+    }
+    & > .question-container {
+        background-color: $white;
+        color: $dark;
+        padding: 1.5em;
+        & td:first-child {
+            margin-right: 1em;
+            max-width: min-content;
+        }  
+        & .mcq-validation { text-align: right; }
+        & table { width: 100%; }
+    }
+}
+
+.quiz-container > .question-container {
+    .fillq-container u {
+    color: rgba(0, 0, 0, 0);
+    border-bottom: 1px solid black;
+}
+.mcq-score {
+    text-align: right; width: 100%; display: inline-block;
+}
+}

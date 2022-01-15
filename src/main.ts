@@ -3,7 +3,8 @@ import mousetrap, { MousetrapStatic } from 'mousetrap';
 import Vue3TouchEvents from 'vue3-touch-events';
 import router from './router';
 // import store from './store';
-import App from './App';
+import App from './views/Document';
+import './style/main.scss';
 
 // Based on https://www.npmjs.com/package/vue-mousetrap
 // but typed with https://v3.vuejs.org/guide/typescript-support.html#augmenting-types-for-globalproperties
