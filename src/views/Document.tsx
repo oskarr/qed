@@ -3,8 +3,8 @@ import toml from 'toml';
 import mdi from 'markdown-it';
 import mdk from '@traptitech/markdown-it-katex';
 
-import Quiz from './Quiz';
 import { range } from '@/utils';
+import Quiz from './Quiz';
 
 const MARKDOWN_IT = mdi().use(mdk, { displayMode: true });
 const QUIZ_BLOCK_REGEXP = new RegExp('```qed-((?:toml)|(?:json))([^]*?)```', 'ig');
