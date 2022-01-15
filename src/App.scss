@@ -1,26 +1,3 @@
-<template>
-  <Quiz />
-</template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-import Quiz from './views/Quiz.vue';
-
-export default defineComponent({
-  name: 'App',
-  components: {
-    Quiz,
-  },
-});
-</script>
-
-<style lang="css" scoped>
-  .container {
-    min-height: 100vh;
-  }
-</style>
-
-<style lang="scss">
 body, #app {min-height: 100vh; width: 100%;}
 /* Bulma imports */
 @import "@/assets/bulma-overrides.scss";
@@ -43,4 +20,3 @@ body, #app {min-height: 100vh; width: 100%;}
 
 /* KaTeX */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.15.1/katex.min.css");
-</style>

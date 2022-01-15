@@ -19,16 +19,21 @@ export default defineComponent({
   props: { question: Object, validate: Boolean },
   methods: {
     renderMD(mdRaw: string) {
-      let md2 = mdRaw;
+      let md2 = `${mdRaw}`;
       if (this.$props && this.$props.question) {
         const q = this.$props.question;
-        const blanksToHideByIndex: number[] = shuffle(range(0, q.blanks.length)).slice(q.blankCount || q.blanks.length);
+        const blankCount = (q.blankCount !== undefined) ? q.blankCount : q.blanks.length;
+        // TODO: Compute this on init.
+        const blanksToHideByIndex: number[] = shuffle(range(0, q.blanks.length)).slice(-blankCount);
+        // TODO: Hide blanks with CSS instead of guessing width with underscores.
         // We do a backwards loop in order for replaceNth to work properly.
         for (let blankIndex = q.blanks.length - 1; blankIndex >= 0; blankIndex -= 1) {
           const blank = q.blanks[blankIndex];
-          const replacement = (blanksToHideByIndex.includes(blankIndex) && !this.$props.validate)
+          const replacement = ((blanksToHideByIndex.includes(blankIndex) || !q.blankCount) && !this.$props.validate)
             ? ('_'.repeat(blank.length)) : blank; // `<u>${blank}</u>`
+          console.log(blankIndex + 1, replacement);
           md2 = replaceNth(md2, '___', replacement, blankIndex + 1);
+          console.log(md2);
         }
       }
       return md.render(md2); // .replace(/&lt;u&gt;/g, '<u>').replace(/&lt;\/u&gt;/g, '</u>');

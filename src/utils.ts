@@ -22,7 +22,7 @@ export function shuffle<T>(a: T[]): T[] {
  * https://stackoverflow.com/questions/35499498/replace-nth-occurrence-of-string
  */
 export function replaceNth(s: string, f: string, r: string, n: number): string {
-  return s.replace(RegExp(`^(?:.*?${f}){${n}}`), (x) => x.replace(RegExp(`${f}$`), r));
+  return s.replace(RegExp(`^(?:(.|\n)*?${f}){${n}}`), (x) => x.replace(RegExp(`${f}$`), r));
 }
 
 /**
