@@ -17,9 +17,9 @@ export default defineComponent({
   render() {
     return (
       <footer>
-        <a onClick={() => this.$emit('prev')}>⬅</a>
-        {this.showCheck && <a onClick={() => this.$emit('validate')}>✓</a>}
-        <a onClick={() => this.$emit('next')}>➡</a>
+        <a onClick={() => this.$emit('prev')} data-test="cardnav-prev">⬅</a>
+        {this.showCheck && <a onClick={() => this.$emit('validate')} data-test="cardnav-validate">✓</a>}
+        <a onClick={() => this.$emit('next')} data-test="cardnav-next">➡</a>
       </footer>
     );
   },

@@ -6,7 +6,7 @@ import { shuffle } from '@/utils';
 const md = mdi().use(mdk, { displayMode: true });
 
 export default defineComponent({
-  name: 'MCQuestion',
+  name: 'MCQ',
   props: {
     question: Object,
     validate: Boolean,

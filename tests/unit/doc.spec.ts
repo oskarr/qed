@@ -3,6 +3,8 @@ import Vue3TouchEvents from 'vue3-touch-events';
 import jestFetchMock from 'jest-fetch-mock';
 
 import { VueMousetrapPlugin } from '@/utils/VueMousetrapPlugin';
+import MCQ from '@/components/question/MCQ';
+import FillQuestion from '@/components/question/Fill';
 import Document from '@/views/Document';
 import router from '@/router';
 
@@ -12,33 +14,23 @@ const MOCK_DOC = `# H1-Titel
 Test av __fetstil__ och *kursiv* text, samt $KaTeX$.
 
 \`\`\`qed-toml
-title = "Quiz"
+title = "Quiz-Titel"
 
 [[questions]]
-question = "___ $=$ ___"
+question = "___ = ___"
 type = "fill"
 blankCount = 1
-blanks = [ "$\\sin(a+b)$", "$\\sin(a)\\cos(b) + \\cos(a)\\sin(b)$" ]
+blanks = [ "blank1", "blank2" ]
 
 [[questions]]
-question = "___ $=$ ___"
-type = "fill"
-blankCount = 1
-blanks = [ "$\\cos(a+b)$", "$\\cos(a)\\cos(b) - \\sin(a)\\sin(b)$" ]
-
-[[questions]]
-question = "$\\cos(2a)=$ ___"
+question = "Which answers are correct?"
 type = "mcq"
-correctAnswers = [
-  "$2\\cos^2(a)-1$",
-  "$\\cos^2(a)-\\sin^2(a)$",
-  "$1-2\\sin^2(a)$"
-]
-incorrectAnswers = [ "$2\\sin(a)\\cos(a)$", "$1-2\\cos^2(a)$" ]
+correctAnswers = [ "correct1", "correct2" ]
+incorrectAnswers = [ "incorrect1", "incorrect2" ]
 \`\`\`
 `;
 
-test('Doc1', async () => {
+test('Markdown', async () => {
   fetchMock.mockOnce(MOCK_DOC);
   const wrapper = mount(Document, { // [store, key],
     global: { plugins: [router, Vue3TouchEvents, VueMousetrapPlugin] },
@@ -47,8 +39,16 @@ test('Doc1', async () => {
   router.push('/docs/1');
   await flushPromises();
 
-  // await wrapper.find('[data-test="settingsButtonWrapper"] > button').trigger('click');
   expect(wrapper.html()).toContain('H1-Titel');
   expect((await wrapper.find('em')).html()).toContain('kursiv');
   expect((await wrapper.find('strong')).html()).toContain('fetstil');
+
+  expect(wrapper.findComponent(FillQuestion).exists()).toEqual(true);
+  expect(wrapper.findComponent(MCQ).exists()).toEqual(false);
+
+  await wrapper.find('[data-test=cardnav-next]').trigger('click');
+  await flushPromises();
+
+  expect(wrapper.findComponent(FillQuestion).exists()).toEqual(false);
+  expect(wrapper.findComponent(MCQ).exists()).toEqual(true);
 });

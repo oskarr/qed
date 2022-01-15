@@ -1,4 +1,9 @@
-# QED
+# ℚ𝔼𝔻
+[![Build](https://img.shields.io/github/workflow/status/oskarr/qed/Build?style=flat-square)](https://github.com/oskarr/qed/actions/workflows/build-vue.yml)
+[![Tests](https://img.shields.io/github/workflow/status/oskarr/qed/Tests?label=tests&style=flat-square)](https://github.com/oskarr/qed/actions/workflows/jest.yml)
+[![Lint](https://img.shields.io/github/workflow/status/oskarr/qed/ESLint?label=lint&style=flat-square)](https://github.com/oskarr/qed/actions/workflows/lint.yml)
+[![Codecov](https://img.shields.io/codecov/c/github/oskarr/qed?style=flat-square)](https://app.codecov.io/gh/oskarr/qed)
+
 Markdown-dokument med quiz. Tänkt för sammanfattningar, etc. Work-in-progress.
 
 ## Användning
