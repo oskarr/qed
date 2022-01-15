@@ -25,8 +25,10 @@ export default defineComponent({
         // We do a backwards loop in order for replaceNth to work properly.
         for (let blankIndex = q.blanks.length - 1; blankIndex >= 0; blankIndex -= 1) {
           const blank = q.blanks[blankIndex];
-          const replacement = ((this.blanksToHideByIndex?.includes(blankIndex) || !q.blankCount) && !this.$props.validate)
-            ? `<u>${blank}</u>` : blank;
+          const replacement = (
+            (this.blanksToHideByIndex?.includes(blankIndex) || !q.blankCount)
+              && !this.$props.validate
+          ) ? `<u>${blank}</u>` : blank;
           md2 = replaceNth(md2, '___', replacement, blankIndex + 1);
         }
       }

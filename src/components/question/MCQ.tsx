@@ -44,7 +44,8 @@ export default defineComponent({
                 </label>
               </td>
               {this.validate && <td class="mcq-validation">
-                {this.checkedOptions[key] === this.isCorrect(option) && <div title="Du valde rätt!">✓</div>}
+                {this.checkedOptions[key] === this.isCorrect(option)
+                  && <div title="Du valde rätt!">✓</div>}
                 {this.checkedOptions[key] !== this.isCorrect(option)
                   && <div title={this.isCorrect(option)
                     ? 'Det här alternativet ska vara valt.' : 'Det här alternativet ska inte vara valt.'}
@@ -54,7 +55,9 @@ export default defineComponent({
            ) }
         </table>
         {this.validate && <span class="mcq-score">
-          { this.shuffledOptions.reduce((acc, cur) => acc + this.isCorrect(cur), 0)}/{ this.shuffledOptions.length }
+          { this.shuffledOptions.reduce((acc, cur) => acc + this.isCorrect(cur), 0) }
+          /
+          { this.shuffledOptions.length }
           </span>}
       </div>
     );

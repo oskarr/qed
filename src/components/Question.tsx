@@ -4,9 +4,8 @@ import mdi from 'markdown-it';
 import mdk from '@traptitech/markdown-it-katex';
 
 // Components
-import CardNav from './CardNav';
 import MCQ from './question/MCQ';
-import NumberQuestion from './question/Number.vue';
+import NumberQuestion from './question/Number';
 import Fill from './question/Fill';
 
 const md = mdi().use(mdk, { displayMode: true });

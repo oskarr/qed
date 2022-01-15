@@ -1,5 +1,4 @@
 import { defineComponent } from 'vue';
-
 import { SwipeIndicatorState } from '@/utils';
 
 import Question from '@/components/Question';
@@ -15,16 +14,16 @@ export default defineComponent({
       return (
         <Swiper swipeHandler={this.swipeHandler} class="quiz-container">
           <header>{quiz.title}</header>
-          <Question question={quiz.questions[this.questionIndex]} validate={ this.validate } key={this.questionIndex}/>
+          <Question question={quiz.questions[this.questionIndex]}
+            validate={ this.validate } key={this.questionIndex}/>
           <CardNav
             onValidate={() => { this.validate = !this.validate; }}
-            onNext={this.next}
-            onPrev={this.prev}
+            onNext={this.next} onPrev={this.prev}
             showCheck={quiz.questions[this.questionIndex].type !== 'number'} />
         </Swiper>
       );
     }
-    return <span>Ogiltigt quiz.</span>;
+    return <span data-test="quiz-error-invalid">Ogiltigt quiz.</span>;
   },
   data() {
     return {
