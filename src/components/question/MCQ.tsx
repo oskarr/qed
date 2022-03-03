@@ -1,4 +1,5 @@
 import { defineComponent } from 'vue';
+import md5 from 'md5';
 import mdi from 'markdown-it';
 import mdk from '@traptitech/markdown-it-katex';
 import { shuffle } from '@/utils';
@@ -32,14 +33,14 @@ export default defineComponent({
         <div v-html={md.render(this.question?.question)}></div>
         <hr />
         <table>
-          { // List of options
+          { // List of options.
            this.shuffledOptions.map(
              (option, key) => <tr>
               <td>
-                <input type="checkbox" v-model={this.checkedOptions[key]} id={`mcq-${key}`}/>
+                <input type="checkbox" v-model={this.checkedOptions[key]} id={md5(option + this.question?.question)}/>
               </td>
               <td>
-                <label class="mcq-option checkbox" for={`mcq-${key}`}>
+                <label class="mcq-option checkbox" for={md5(option + this.question?.question)}>
                   <div v-html={md.render(option)}></div>
                 </label>
               </td>

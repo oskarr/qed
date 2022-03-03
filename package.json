@@ -12,6 +12,7 @@
     "@traptitech/markdown-it-katex": "^3.5.0",
     "@vue/babel-plugin-jsx": "^1.1.1",
     "markdown-it": "^12.3.2",
+    "md5": "^2.3.0",
     "mousetrap": "^1.6.5",
     "toml": "^3.0.0",
     "vue": "^3.0.0",
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@types/jest": "^24.0.19",
     "@types/markdown-it": "^12.2.3",
+    "@types/md5": "^2.3.1",
     "@types/mousetrap": "^1.6.9",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",

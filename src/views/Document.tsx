@@ -7,7 +7,8 @@ import { range } from '@/utils';
 import Quiz from './Quiz';
 
 const MARKDOWN_IT = mdi().use(mdk, { displayMode: true });
-const QUIZ_BLOCK_REGEXP = new RegExp('```qed-((?:toml)|(?:json))([^]*?)```', 'ig');
+const QUIZ_BLOCK_REGEXP = new RegExp('```\\s?qed-((?:toml)|(?:json))([^]*?)```', 'ig');
+const QUIZ_BLOCK_REGEXP_NO_CAPTURE = new RegExp('```\\s?qed-(?:(?:toml)|(?:json))(?:[^]*?)```', 'ig');
 
 export default defineComponent({
   name: 'App',
@@ -22,7 +23,8 @@ export default defineComponent({
       return <span data-test="document-error-unknown">Okänt fel</span>;
     }
     const quizzes = Array.from(this.data.matchAll(QUIZ_BLOCK_REGEXP));
-    const textblocks = this.data.split(QUIZ_BLOCK_REGEXP);
+    const textblocks = this.data.split(QUIZ_BLOCK_REGEXP_NO_CAPTURE);
+    console.log(quizzes);
     const arr = range(0, quizzes.length * 2).map((i) => {
       // eslint-disable-next-line no-bitwise
       const j = i >> 1;
@@ -33,8 +35,10 @@ export default defineComponent({
       const parsedQuiz = (quizzes[j][1] === 'toml') ? toml.parse(quizzes[j][2]) : JSON.parse(quizzes[j][2]);
       return <Quiz quiz={parsedQuiz}/>;
     });
-    return (
-    <div class="document">{arr}</div>);
+    if (quizzes.length < textblocks.length) { // TODO: Making this a special-case is ugly. Also we need tests for this.
+      arr.push(<div v-html={MARKDOWN_IT.render(textblocks[textblocks.length - 1])}></div>);
+    }
+    return (<div class="document">{arr}</div>);
   },
   data() {
     return {
@@ -52,7 +56,7 @@ export default defineComponent({
       this.data = undefined;
       this.loading = true;
       const fetchedId = this.$route.params.id;
-      fetch(`/doc/${fetchedId}.md`).then(async (res: Response) => {
+      fetch(`doc/${fetchedId}.md`).then(async (res: Response) => {
         // make sure this request is the last one we did, discard otherwise
         if (this.$route.params.id === fetchedId) {
           this.loading = false;

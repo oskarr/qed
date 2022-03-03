@@ -16,9 +16,6 @@ export default defineComponent({
     };
   },
   methods: {
-    renderMD(mdRaw: string) {
-      return md.render(mdRaw);
-    },
     shuffle,
     isCorrect(answer: number): boolean {
       const q = this.$props?.question;
@@ -28,7 +25,7 @@ export default defineComponent({
   render() {
     return (
       <div class="card-content">
-        <div v-html="renderMD(question.question)"></div>
+        <div v-html={md.render((this.$props?.question && this.$props.question.question) || 'Okänt fel')}></div>
         <hr />
         <div>
           <div class="field">
